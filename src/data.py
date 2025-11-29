@@ -23,7 +23,7 @@ def sine(inputs: torch.Tensor) -> torch.Tensor:
 def cosine_squared(inputs: torch.Tensor) -> torch.Tensor:
     return inputs.cos().square()
 
-def create_batches(unbatched_list: list[torch.Tensor], batch_size: int) -> tuple[torch.Tensor]:
+def create_batches(unbatched_list: list[torch.Tensor], batch_size: int):
     batch_count = unbatched_list[0].size(0) // batch_size
     result = []
 
