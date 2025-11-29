@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import datetime
+from .data import create_batches
 
 def train_one_epoch(model: nn.Module, optimizer: torch.optim.Optimizer, loss_function, device, batched_samples: torch.Tensor, batched_params: torch.Tensor):
     model.train()
@@ -54,3 +55,16 @@ def predict_next_values(model: nn.Module, values: torch.Tensor, sequence_length:
         all_values[i + sequence_length] = predicted_next_value
 
     return all_values.cpu().split((sequence_length, count))
+
+def make_prediction(model: nn.Module, values: torch.Tensor, batch_size: int) -> torch.Tensor:
+    predictions = []
+    batched = create_batches([values], batch_size)[0]
+    device = next(model.parameters()).device
+    
+    for batch in batched:
+        with torch.no_grad():
+            pred = model(batch.to(device)).cpu()
+
+        predictions.append(pred)
+
+    return torch.cat(predictions).reshape(-1)
