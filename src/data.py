@@ -31,3 +31,7 @@ def create_batches(unbatched_list: list[torch.Tensor], batch_size: int):
         result.append(unbatched.reshape(batch_count, batch_size, *unbatched.shape[1:]))
     
     return tuple(result)
+
+def add_noise(values: torch.Tensor, noise_strength: float):
+    noise = noise_strength * torch.randn_like(values)
+    return values + noise
