@@ -31,7 +31,7 @@ The resulting model (1.7M parameters) was able to fill in these missing parts wi
 
 ## Repository structure
 
-Training notebooks can be seen in the training folder.
-The trained models's weights can be found under the models folder, and their evaluation can be found in the evaluation folder.
+Training and evaluation notebooks are in the root of the repository.
+The trained models's weights can be found under the models folder.
 To run the notebooks, you can install the requirements.txt and the notebook package.
 The final paper can be found in report.pdf
